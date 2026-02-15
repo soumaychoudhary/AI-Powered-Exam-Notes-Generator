@@ -94,7 +94,7 @@ const Navbar = () => {
                 Use credits to generate AI notes, diagrams & PDFs
               </p>
               <button 
-                onClick={()=>{setShowCreadits(!showCreadits)}}
+                onClick={()=>{setShowCreadits(false); navigate("/pricing")}}
                 className='w-full py-2 rounded-lg
                 bg-linear-to-br from-white to-gray-200
                 text-black font-semibold 
@@ -140,7 +140,7 @@ const Navbar = () => {
               shadow-[0_25px_60px_rgba(0,0,0,0.7)]
               p-4 text-white'
             >
-              <MenuItem text="History" onClick={()=>setShowProfile(false)} /> 
+              <MenuItem text="History" onclick={()=>{setShowProfile(false);navigate("/history")}} /> 
               <div className='h-px bg-white/10 mx-3' />
               <MenuItem text="sign out" red onclick={handleSignOut} />
             </motion.div>
