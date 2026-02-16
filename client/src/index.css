@@ -1,1 +1,18 @@
 @import 'tailwindcss';
+
+
+@utility gradient{
+  @apply bg-gradient-to-br from-black/90 via-black/80 to-black/90;
+}
+
+@utility black-shadow-lg{
+  @apply shadow-[0_25px_60px_rgba(0,0,0,0.75)];
+}
+
+@utility black-shadow-sm {
+  @apply shadow-[0_5px_15px_rgba(0,0,0,0.25)];
+}
+
+@utility black-shadow-md {
+  @apply shadow-[0_5px_35px_rgba(0,0,0,0.4)];
+}

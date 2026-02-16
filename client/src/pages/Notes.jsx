@@ -1,8 +1,108 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { motion } from 'motion/react'
+import {useNavigate} from "react-router-dom"
+import { useSelector } from 'react-redux'
+import TopicForm from '../components/TopicForm'
 const Notes = () => {
+  const navigate= useNavigate()
+  const {userData}=useSelector((state)=>state.user)
+  const credits = userData.credits
+
+  const [loading,setLoading]=useState(false);
+  const [result,setResult]=useState(null);
+  const [error,setError]=useState("")
   return (
-    <div>Notes</div>
+    <div className='min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-6 py-4'>
+      <motion.header 
+        initial = {{opacity:0 , y:-15}}
+        animate = {{opacity:1 , y:0}}
+        transition = {{duration:0.5}}
+        className='mb-10 rounded-2xl 
+        bg-black/60 backdrop-blur-2xl
+        border border-white/10
+        px-8 py-3
+        shadow-[0_20px_45px_rgba(0,0,0,0.6)]
+        flex md:items-center justify-between gap-4 flex-col md:flex-row
+      '>
+        {/* left side  */}
+        <div onClick={()=>(navigate("/"))} className='cursor-pointer'>
+          <h1 className='text-2xl font-bold 
+          bg-linear-to-r from-white via-gray-300 to-white
+          bg-clip-text text-transparent
+          '>
+            ExamNotes AI
+          </h1>
+
+          <p className='tex-sm text-gray-300 mt-1'>
+            AI-powered exam-oriented notes & revision
+          </p>
+        </div>
+
+        {/* right side  */}
+        <div className='flex items-center gap-4 flex-wrap'>
+          <button 
+            onClick={()=>(navigate("/pricing"))}
+            className='flex items-center gap-2
+            px-3 py-3 rounded-full
+            bg-white/10
+            border border-white/10
+            text-white text-sm cursor-pointer transition'
+          >
+            <span className='text-md'>💠</span>
+            <span>{credits}</span>
+            <motion.span
+              whileHover={{scale:1.02}}
+              whileTap={{scale:0.97}}
+              className='ml-2 h-4 w-4 flex items-center justify-center 
+              rounded-full bg-white text-sm font-bold '
+            >
+              ➕
+            </motion.span>
+          </button>
+
+          <button
+          onClick={()=>(navigate("/history"))}
+            className='flex items-center gap-2
+            px-3 py-3 rounded-full
+            bg-white/10 hover:bg-white/20
+            border border-white/10
+            text-white text-sm
+            font-medium cursor-pointer
+            transition'
+          >
+            📚 Your Notes
+          </button>
+        </div>
+        
+
+      </motion.header>
+
+      <motion.div
+        className='mb-12'
+      >
+        <TopicForm 
+          loading={loading} 
+          setResult={setResult} 
+          setLoading={setLoading} 
+          setError={setError}
+        />
+      </motion.div>
+
+      {!result && <motion.div
+        whileHover={{scale:1.02}}
+        className='h-64 rounded-2xl
+        flex flex-col items-center justify-center
+        bg-white/60 backdrop-blur-lg
+        border border-dashed border-gray-300
+        text-gray-500
+        shadow-inner'
+      >
+        <span className='text-4xl mb-3'>📘</span>
+        <p className='text-sm'>
+          Generate notes will appear here
+        </p>
+      </motion.div>}
+    </div>
   )
 }
 
