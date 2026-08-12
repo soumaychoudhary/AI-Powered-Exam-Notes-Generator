@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux"
 import History from './pages/History'
 import Notes from './pages/Notes'
 import Pricing from './pages/Pricing'
+export const serverUrl = "http://localhost:8000"
 
 const App = () => {
 
